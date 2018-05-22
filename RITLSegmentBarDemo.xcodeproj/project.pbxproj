@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB27B11B20B4097D004175D3 /* RITLSegmentBar.gif in Resources */ = {isa = PBXBuildFile; fileRef = DB27B11A20B4097D004175D3 /* RITLSegmentBar.gif */; };
 		DB3747C820B3ACAD001A4F53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3747C720B3ACAD001A4F53 /* AppDelegate.m */; };
 		DB3747CB20B3ACAD001A4F53 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3747CA20B3ACAD001A4F53 /* ViewController.m */; };
 		DB3747CE20B3ACAD001A4F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3747CC20B3ACAD001A4F53 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB27B11A20B4097D004175D3 /* RITLSegmentBar.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = RITLSegmentBar.gif; sourceTree = "<group>"; };
 		DB3747C320B3ACAD001A4F53 /* RITLSegmentBarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RITLSegmentBarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB3747C620B3ACAD001A4F53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DB3747C720B3ACAD001A4F53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		DB3747C520B3ACAD001A4F53 /* RITLSegmentBarDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DB27B11A20B4097D004175D3 /* RITLSegmentBar.gif */,
 				DB3747C620B3ACAD001A4F53 /* AppDelegate.h */,
 				DB3747C720B3ACAD001A4F53 /* AppDelegate.m */,
 				DB3747C920B3ACAD001A4F53 /* ViewController.h */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB3747D320B3ACAD001A4F53 /* LaunchScreen.storyboard in Resources */,
+				DB27B11B20B4097D004175D3 /* RITLSegmentBar.gif in Resources */,
 				DB3747D020B3ACAD001A4F53 /* Assets.xcassets in Resources */,
 				DB3747CE20B3ACAD001A4F53 /* Main.storyboard in Resources */,
 			);
