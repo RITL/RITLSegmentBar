@@ -1,7 +1,7 @@
 # RITLSegmentBar
 一款高度设置的指示器组件
 
-<div align="center"><img src="https://github.com/RITL/RITLSegmentBar/blob/master/RITLSegmentBarDemo/RITLSegmentBar.gif" height=260></img></div>
+<div align="center"><img src="https://github.com/RITL/RITLSegmentBar/blob/master/RITLSegmentBarDemo/RITLSegmentBar.gif" height=130></img></div>
 
 ```
 /// segmentBar
