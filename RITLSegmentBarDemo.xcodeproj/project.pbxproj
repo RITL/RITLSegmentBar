@@ -13,6 +13,7 @@
 		DB3747D020B3ACAD001A4F53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB3747CF20B3ACAD001A4F53 /* Assets.xcassets */; };
 		DB3747D320B3ACAD001A4F53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3747D120B3ACAD001A4F53 /* LaunchScreen.storyboard */; };
 		DB3747D620B3ACAD001A4F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3747D520B3ACAD001A4F53 /* main.m */; };
+		DB3747DF20B3ACDA001A4F53 /* RITLSegmentBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3747DE20B3ACDA001A4F53 /* RITLSegmentBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		DB3747D220B3ACAD001A4F53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB3747D420B3ACAD001A4F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB3747D520B3ACAD001A4F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DB3747DD20B3ACDA001A4F53 /* RITLSegmentBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RITLSegmentBar.h; sourceTree = "<group>"; };
+		DB3747DE20B3ACDA001A4F53 /* RITLSegmentBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RITLSegmentBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +45,7 @@
 		DB3747BA20B3ACAC001A4F53 = {
 			isa = PBXGroup;
 			children = (
+				DB3747DC20B3ACCB001A4F53 /* RITLSegmentBar */,
 				DB3747C520B3ACAD001A4F53 /* RITLSegmentBarDemo */,
 				DB3747C420B3ACAD001A4F53 /* Products */,
 			);
@@ -69,6 +73,15 @@
 				DB3747D520B3ACAD001A4F53 /* main.m */,
 			);
 			path = RITLSegmentBarDemo;
+			sourceTree = "<group>";
+		};
+		DB3747DC20B3ACCB001A4F53 /* RITLSegmentBar */ = {
+			isa = PBXGroup;
+			children = (
+				DB3747DD20B3ACDA001A4F53 /* RITLSegmentBar.h */,
+				DB3747DE20B3ACDA001A4F53 /* RITLSegmentBar.m */,
+			);
+			path = RITLSegmentBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +156,7 @@
 			files = (
 				DB3747CB20B3ACAD001A4F53 /* ViewController.m in Sources */,
 				DB3747D620B3ACAD001A4F53 /* main.m in Sources */,
+				DB3747DF20B3ACDA001A4F53 /* RITLSegmentBar.m in Sources */,
 				DB3747C820B3ACAD001A4F53 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
