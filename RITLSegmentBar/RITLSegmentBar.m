@@ -104,6 +104,11 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
 
 - (void)selectedIndex:(NSInteger)index actionDelegate:(BOOL)shouldAction
 {
+    if (self.lastIndex != _selectIndex) {
+        self.lastIndex = _selectIndex;
+    }
+    _selectIndex =  index;
+    
     if (self.shouldRepetAction) {//如果允许重复响应
         if (shouldAction && [self.delegate respondsToSelector:@selector(segmentBar:didSelectIndex:fromIndex:)]){
             [self.delegate segmentBar:self didSelectIndex:index fromIndex:self.lastIndex];
@@ -113,9 +118,6 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
             [self.delegate segmentBar:self didSelectIndex:index fromIndex:self.lastIndex];
         }
     }
-    
-    self.lastIndex = _selectIndex;
-    _selectIndex =  index;
     
     //获得按钮
     UIButton *lastBtn = self.itemBtns[self.lastIndex];
