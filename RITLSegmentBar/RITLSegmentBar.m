@@ -141,8 +141,8 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     //进行滚动
     CGFloat scrollX = MIN(self.contentView.contentSize.width - self.contentView.seg_width,MAX(0,selectBtn.seg_x - self.contentView.seg_width / 2.0));
     
-    scrollX = self.seg_width == 0 ? 0 : scrollX;//避免autolayout引起的初始化位置失败
-    
+//    scrollX = self.seg_width == 0 ? 0 : scrollX;//避免autolayout引起的初始化位置失败
+    scrollX = self.seg_width == 0 ? 0 : MAX(0,scrollX);//避免autolayout引起的初始化位置失败
     [self.contentView setContentOffset:CGPointMake(scrollX, 0) animated:true];
 }
 
