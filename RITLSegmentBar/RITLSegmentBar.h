@@ -21,11 +21,25 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param segmentBar 选项卡控件
  @param toIndex 选中的位置
- @param formIndex 原来选中的位置
+ @param fromIndex 原来选中的位置
  */
 - (void)segmentBar:(RITLSegmentBar *)segmentBar
     didSelectIndex:(NSInteger)toIndex
-         fromIndex:(NSInteger)formIndex;
+         fromIndex:(NSInteger)fromIndex;
+
+
+/// 当前位置是否能够响应点击时间
+- (BOOL)segmentBar:(RITLSegmentBar *)segmentBar shouldActionAtIndex:(NSInteger)index;
+
+
+/**
+ 初始化时自定义按钮属性的方法
+
+ @param segmentBar segmentBar
+ @param button 初始化的button
+ @param index 按钮的索引
+ */
+- (void)segmentBar:(RITLSegmentBar *)segmentBar customButton:(UIButton *)button atIndex:(NSInteger)index;
 
 @end
 
@@ -75,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)CGFloat buttonMarginSpace;
 /// 文字响应按钮的固定高度，默认 RITLSegmentBarButtonsHeightDefault
 @property (nonatomic, assign)CGFloat buttonHeight;
+/// 文字响应按钮的固定宽度，默认 RITLSegmentBarButtonsWidthDefault
+@property (nonatomic, assign)CGFloat buttonWidth;
 /// 文字选中，如果需要修改大小，默认为buttonHeight
 @property (nonatomic, assign)CGFloat buttonSelectedHeight;
 
@@ -102,5 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern CGFloat RITLSegmentBarButtonsMarginSpaceDefault;
 /// 默认的文本高度
 extern CGFloat RITLSegmentBarButtonsHeightDefault;
+/// 默认的文本宽度
+extern CGFloat RITLSegmentBarButtonsWidthDefault;
 
 NS_ASSUME_NONNULL_END

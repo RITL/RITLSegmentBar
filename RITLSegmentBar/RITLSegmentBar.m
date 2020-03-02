@@ -19,12 +19,13 @@
 @end
 
 CGFloat RITLSegmentBarButtonsHeightDefault = -1;
+CGFloat RITLSegmentBarButtonsWidthDefault = -1;
 CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
 
 
 @interface RITLSegmentBar()
 /// 内容承载的视图
-@property (nonatomic, strong) UIScrollView *contentView;
+@property (nonatomic, strong, readwrite) UIScrollView *contentView;
 /// 存放响应按钮的数组
 @property (nonatomic, strong) NSMutableArray<UIButton *> *itemBtns;
 /// 指示器
@@ -72,6 +73,7 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     self.buttonMarginSpace = RITLSegmentBarButtonsMarginSpaceDefault;
     self.buttonHeight = RITLSegmentBarButtonsHeightDefault;
     self.buttonSelectedHeight = RITLSegmentBarButtonsHeightDefault;
+    self.buttonWidth = RITLSegmentBarButtonsWidthDefault;
     self.contentMargin = UIEdgeInsetsMake(2, 23, 0, 23);
 }
 
@@ -85,6 +87,12 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
 
 - (void)btnDidClick:(UIButton *)sender
 {
+    NSInteger index = [self.itemBtns indexOfObject:sender];
+    
+    if ([self.delegate respondsToSelector:@selector(segmentBar:shouldActionAtIndex:)] && ![self.delegate segmentBar:self shouldActionAtIndex:index]) {
+        return;
+    }
+    
     [self setSelectIndex:[self.itemBtns indexOfObject:sender]];
 }
 
@@ -107,6 +115,7 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     if (self.lastIndex != _selectIndex) {
         self.lastIndex = _selectIndex;
     }
+    
     _selectIndex =  index;
     
     if (self.shouldRepetAction) {//如果允许重复响应
@@ -129,14 +138,12 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     [self layoutIfNeeded];
     
     [UIView animateWithDuration:0.3 animations:^{
-       
-        if (self.isAutoFitItem) {
-            self.indicatorView.seg_width = selectBtn.seg_width;
-        }else {
-            self.indicatorView.seg_width = self.indicatorWidth;
-        }
+        
+        if (self.isAutoFitItem) { self.indicatorView.seg_width = selectBtn.seg_width; }
+        else { self.indicatorView.seg_width = self.indicatorWidth; }
         self.indicatorView.seg_centerX = selectBtn.seg_centerX;
-    }];
+        
+    } completion:^(BOOL finished) {}];
     
     //进行滚动
     CGFloat scrollX = MIN(self.contentView.contentSize.width - self.contentView.seg_width,MAX(0,selectBtn.seg_x - self.contentView.seg_width / 2.0));
@@ -184,6 +191,10 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         [self.itemBtns addObject:button];
         
         [button addTarget:self action:@selector(btnDidClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([self.delegate respondsToSelector:@selector(segmentBar:customButton:atIndex:)]) {
+            [self.delegate segmentBar:self customButton:button atIndex:index];
+        }
     }
     
     [self setNeedsLayout];
@@ -230,13 +241,18 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         if (self.buttonHeight != RITLSegmentBarButtonsHeightDefault) {//如果存在设置的高度进行设置
             btn.seg_height = self.buttonHeight;
         }
+        
+        if (self.buttonWidth != RITLSegmentBarButtonsWidthDefault) {
+            btn.seg_width = self.buttonWidth;
+        }
+        
         totalBtnWidth += (btn.seg_width + self.buttonExpandedSpace);
         
-        NSInteger index = [self.itemBtns indexOfObject:btn];
-        NSLog(@"I am %@, my size is %@,I am %@",self.items[index],NSStringFromCGSize(btn.bounds.size),btn.selected ? @"selected" : @"unSelected");
+//        NSInteger index = [self.itemBtns indexOfObject:btn];
+//        NSLog(@"I am %@, my size is %@,I am %@",self.items[index],NSStringFromCGSize(btn.bounds.size),btn.selected ? @"selected" : @"unSelected");
     }
     
-    NSLog(@"\n");
+//    NSLog(@"\n");
     
     if (self.buttonSelectedHeight != RITLSegmentBarButtonsHeightDefault) {
         
@@ -250,7 +266,7 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     
     if (!self.canScroll) {//如果是不可以滑动的,进行均分
         
-        NSAssert(self.seg_width - totalBtnWidth - self.contentMargin.left - self.contentMargin.right > 0, @"当前frame不足以展示所有的items");
+//        NSAssert(self.seg_width - totalBtnWidth - self.contentMargin.left - self.contentMargin.right > 0, @"当前frame不足以展示所有的items");
         
         buttonsSpace = (self.seg_width - totalBtnWidth - ABS(self.contentMargin.left) - ABS(self.contentMargin.right)) / (self.itemBtns.count - 1);
     }
@@ -266,7 +282,9 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         contentSizeWidth += buttonsSpace;
         
         // 保证所有的中心一致
-        button.seg_centerY = (self.contentView.seg_height - self.contentMargin.top - self.contentMargin.bottom) / 2.0;
+        button.seg_centerY = self.contentMargin.top + button.seg_height / 2.0;
+        
+//        (self.contentView.seg_height - self.contentMargin.top - self.contentMargin.bottom) / 2.0 + self.contentMargin.top / 2.0;
     }
     
     contentSizeWidth += self.contentMargin.right;
@@ -283,7 +301,7 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         self.indicatorView.seg_width = self.indicatorWidth;
     }
     
-    self.indicatorView.seg_centerX = selectedButton.seg_centerX;
+//    self.indicatorView.seg_centerX = selectedButton.seg_centerX;
     self.indicatorView.seg_height = self.indicatorHeight;
     self.indicatorView.seg_y = self.seg_height - ABS(self.indicatorHeight) - ABS(self.indicatorMarginBottom);
 }
@@ -352,6 +370,13 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         
         UIScrollView *scrollView = UIScrollView.new;
         scrollView.showsHorizontalScrollIndicator = false;
+        
+        if (@available(iOS 11.0, *)) {
+            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
+        
         [self addSubview:scrollView];
         _contentView = scrollView;
     }
