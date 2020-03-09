@@ -134,9 +134,6 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     UIButton *selectBtn = self.itemBtns[index];
     [selectBtn setAttributedTitle:[self attributeAtIndex:index] forState:UIControlStateNormal];
     
-    [self setNeedsLayout];//重新布置
-    [self layoutIfNeeded];
-    
     [UIView animateWithDuration:0.3 animations:^{
         
         if (self.isAutoFitItem) { self.indicatorView.seg_width = selectBtn.seg_width; }
@@ -144,6 +141,10 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         self.indicatorView.seg_centerX = selectBtn.seg_centerX;
         
     } completion:^(BOOL finished) {}];
+    
+    
+    [self setNeedsLayout];//重新布置
+    [self layoutIfNeeded];
     
     //进行滚动
     CGFloat scrollX = MIN(self.contentView.contentSize.width - self.contentView.seg_width,MAX(0,selectBtn.seg_x - self.contentView.seg_width / 2.0));
