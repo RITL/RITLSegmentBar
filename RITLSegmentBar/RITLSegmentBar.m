@@ -134,6 +134,9 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
     UIButton *selectBtn = self.itemBtns[index];
     [selectBtn setAttributedTitle:[self attributeAtIndex:index] forState:UIControlStateNormal];
     
+    [self setNeedsLayout];//重新布置
+    [self layoutIfNeeded];
+    
     [UIView animateWithDuration:0.3 animations:^{
         
         if (self.isAutoFitItem) { self.indicatorView.seg_width = selectBtn.seg_width; }
@@ -141,10 +144,6 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         self.indicatorView.seg_centerX = selectBtn.seg_centerX;
         
     } completion:^(BOOL finished) {}];
-    
-    
-    [self setNeedsLayout];//重新布置
-    [self layoutIfNeeded];
     
     //进行滚动
     CGFloat scrollX = MIN(self.contentView.contentSize.width - self.contentView.seg_width,MAX(0,selectBtn.seg_x - self.contentView.seg_width / 2.0));
@@ -282,8 +281,13 @@ CGFloat RITLSegmentBarButtonsMarginSpaceDefault = -1;
         lastX += (button.seg_width + buttonsSpace);
         contentSizeWidth += buttonsSpace;
         
+        CGFloat buttonHeight = button.ritl_height;
+        if (self.buttonHeight != RITLSegmentBarButtonsHeightDefault) {//使用了自定义的高度
+            buttonHeight = MAX(self.buttonHeight, self.buttonSelectedHeight);
+        }
+        
         // 保证所有的中心一致
-        button.seg_centerY = self.contentMargin.top + button.seg_height / 2.0;
+        button.seg_centerY = self.contentMargin.top + /*button.ritl_height*/buttonHeight / 2.0;
         
 //        (self.contentView.seg_height - self.contentMargin.top - self.contentMargin.bottom) / 2.0 + self.contentMargin.top / 2.0;
     }
